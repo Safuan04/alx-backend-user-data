@@ -7,9 +7,6 @@ import base64
 from typing import Tuple, TypeVar
 
 
-User = TypeVar('User')
-
-
 class BasicAuth(Auth):
     """ BasicAuth class
     """
