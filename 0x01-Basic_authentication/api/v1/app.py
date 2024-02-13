@@ -21,6 +21,7 @@ if getenv('AUTH_TYPE') == 'basic_auth':
 else:
     auth = Auth()
 
+
 @app.before_request
 def before_request():
     """ filtering of each request
@@ -33,13 +34,13 @@ def before_request():
         '/api/v1/forbidden/'
         ]
     require_auth = auth.require_auth(request.path, path_list)
-    if require_auth == False:
+    if require_auth is False:
         return
     auth_header = auth.authorization_header(request)
-    if auth_header == None:
+    if auth_header is None:
         abort(401)
     current_user = auth.current_user(request)
-    if current_user == None:
+    if current_user is None:
         abort(403)
 
 
