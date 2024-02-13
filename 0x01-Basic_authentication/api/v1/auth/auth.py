@@ -5,6 +5,9 @@ from flask import request
 from typing import List, TypeVar
 
 
+User = TypeVar('User')
+
+
 class Auth:
     """ Auth class
     """
@@ -28,9 +31,15 @@ class Auth:
     def authorization_header(self, request=None) -> str:
         """ Authorization header
         """
-        return None
+        if not request:
+            return None
+        auth_value = request.headers.get('Authorization')
+        if not auth_value:
+            return None
+        else:
+            return auth_value
 
-    def current_user(self, request=None) -> TypeVar('User'):
+    def current_user(self, request=None) -> User:
         """ Current user
         """
         return None
