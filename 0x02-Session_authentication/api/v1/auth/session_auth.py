@@ -2,6 +2,7 @@
 """ Creating the SessionAuth class
 """
 from api.v1.auth.auth import Auth
+from models.user import User
 import uuid
 
 
@@ -31,3 +32,14 @@ class SessionAuth(Auth):
             return None
         value = self.user_id_by_session_id.get(session_id)
         return value
+
+    def current_user(self, request=None):
+        """ returns a User instance based on a cookie value
+        """
+        cookie_value = self.session_cookie(request)
+        if cookie_value:
+            user_id = self.user_id_for_session_id(cookie_value)
+            if user_id:
+                user = User.get(user_id)
+
+        return user
