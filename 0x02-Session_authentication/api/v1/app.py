@@ -34,7 +34,8 @@ def before_request():
     path_list = [
         '/api/v1/status/',
         '/api/v1/unauthorized/',
-        '/api/v1/forbidden/'
+        '/api/v1/forbidden/',
+        '/api/v1/auth_session/login/'
         ]
     require_auth = auth.require_auth(request.path, path_list)
     if require_auth is False:
@@ -44,7 +45,7 @@ def before_request():
         abort(401)
     current_user = auth.current_user(request)
     if current_user is None:
-        abort(403)
+        abort(401)
 
 
 @app.errorhandler(404)
