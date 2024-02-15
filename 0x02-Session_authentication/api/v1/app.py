@@ -40,8 +40,9 @@ def before_request():
     require_auth = auth.require_auth(request.path, path_list)
     if require_auth is False:
         return
+    auth_cookie = auth.session_cookie(request)
     auth_header = auth.authorization_header(request)
-    if auth_header is None:
+    if auth_header is None and auth_cookie is None:
         abort(401)
     current_user = auth.current_user(request)
     if current_user is None:
