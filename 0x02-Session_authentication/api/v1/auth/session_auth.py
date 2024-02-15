@@ -17,7 +17,7 @@ class SessionAuth(Auth):
             return None
         if not isinstance(user_id, str):
             return None
-        
+
         self.id = str(uuid.uuid4())
         self.user_id_by_session_id[self.id] = user_id
         return self.id
