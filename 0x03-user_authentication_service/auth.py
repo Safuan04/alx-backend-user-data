@@ -54,11 +54,12 @@ class Auth:
         -   as the users session_id, then return the session ID."""
         try:
             user = self._db.find_user_by(email=email)
-            session_id = _generate_uuid()
-            self._db.update_user(user.id, session_id=session_id)
-            return session_id
         except NoResultFound:
-            NoResultFound()
+            return None
+
+        session_id = _generate_uuid()
+        self._db.update_user(user.id, session_id=session_id)
+        return session_id
 
 
 def _generate_uuid() -> str:
