@@ -42,9 +42,7 @@ class DB:
         return new_user
 
     def find_user_by(self, **kwargs: Dict[str, str]) -> User:
-        """ This method takes in arbitrary keyword arguments
-        -   and returns the first row found in the users table
-        """
+        """Finding a user based on the keyword arguments provided"""
         try:
             user = self._session.query(User).filter_by(**kwargs).one()
         except NoResultFound:
