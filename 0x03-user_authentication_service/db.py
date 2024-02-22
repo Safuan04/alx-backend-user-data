@@ -54,15 +54,14 @@ class DB:
 
         return user
 
-    def update_user(self, user_id: int, **kwargs: Dict[str, str]) -> None:
-        """ This method will use find_user_by to locate the user to update
-        -   then will update the users attributes
-        -   as passed in the methods arguments
-        -   then commit changes to the database.
-        """
-        user_to_update = self.find_user_by(id=user_id)
-        for key, value in kwargs.items():
+    def update_user(self, user_id: int,
+                    **kwargs: Dict[str, str]) -> None:
+        """Updates user's attribute values based on keyword
+        arguments provided"""
+        user = self.find_user_by(id=user_id)
+        for key, val in kwargs.items():
             if not hasattr(User, key):
                 raise ValueError()
-            setattr(user_to_update, key, value)
+            setattr(user, key, val)
+
         self._session.commit()
