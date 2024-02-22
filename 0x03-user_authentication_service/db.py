@@ -62,7 +62,7 @@ class DB:
         """
         user_to_update = self.find_user_by(id=user_id)
         for email, hashed_password in kwargs.items():
-            if email is None or hashed_password is None:
+            if 'email' not in kwargs or 'hashed_password' not in kwargs:
                 raise ValueError()
             user_to_update.email = email
             user_to_update.hashed_password = hashed_password
