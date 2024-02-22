@@ -48,8 +48,8 @@ class Auth:
 
         return checkpw(password.encode('utf-8'), user.hashed_password)
 
-    def _generate_uuid() -> str:
-        """ Generate an UUID
-        """
-        new_uuid = uuid.uuid4()
-        return str(new_uuid)
+def _generate_uuid() -> str:
+    """ Generate an UUID
+    """
+    new_uuid = uuid.uuid4()
+    return str(new_uuid)
