@@ -52,4 +52,4 @@ class Auth:
         """ Generate an UUID
         """
         new_uuid = uuid.uuid4()
-        return new_uuid
+        return str(new_uuid)
