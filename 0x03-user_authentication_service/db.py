@@ -56,14 +56,14 @@ class DB:
 
     def update_user(self, user_id: int, **kwargs: Dict[str, str]) -> None:
         """ This method will use find_user_by to locate the user to update
-        -   then will update the users attributes as passed in the methods arguments
+        -   then will update the users attributes
+        -   as passed in the methods arguments
         -   then commit changes to the database.
         """
-        try:
-            user_to_update = self.find_user_by(id=user_id)
-            for email, hashed_password in kwargs.items():
-                user_to_update.email = email
-                user_to_update.hashed_password = hashed_password
-            self._session.commit()
-        except ValueError:
-            raise ValueError()
+        user_to_update = self.find_user_by(id=user_id)
+        for email, hashed_password in kwargs.items():
+            if email is None or hashed_password is None:
+                raise ValueError()
+            user_to_update.email = email
+            user_to_update.hashed_password = hashed_password
+        self._session.commit()
