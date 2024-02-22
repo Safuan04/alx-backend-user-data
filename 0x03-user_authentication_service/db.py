@@ -60,10 +60,10 @@ class DB:
         -   as passed in the methods arguments
         -   then commit changes to the database.
         """
+        valid_attributes = {'email', 'hashed_password'}
         user_to_update = self.find_user_by(id=user_id)
-        for email, hashed_password in kwargs.items():
-            if 'email' not in kwargs or 'hashed_password' not in kwargs:
+        for key, value in kwargs.items():
+            if key not in valid_attributes:
                 raise ValueError()
-            user_to_update.email = email
-            user_to_update.hashed_password = hashed_password
+            setattr(user_to_update, key, value)
         self._session.commit()
