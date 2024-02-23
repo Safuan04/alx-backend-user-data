@@ -53,7 +53,7 @@ def logout() -> str:
 
     if user:
         AUTH.destroy_session(user.id)
-        redirect(url_for("index"))
+        return redirect(url_for("index"))
 
     abort(403)
 
