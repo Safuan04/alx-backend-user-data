@@ -71,7 +71,7 @@ def profile() -> str:
     return jsonify({"email": f"{user.email}"}), 200
 
 
-@app.route('/reset_password', methods=['GET'], strict_slashes=False)
+@app.route('/reset_password', methods=['POST'], strict_slashes=False)
 def get_reset_password_token() -> str:
     """ Reset password
     """
@@ -84,7 +84,7 @@ def get_reset_password_token() -> str:
 
     AUTH.get_reset_password_token(user_email)
     return jsonify({"email": f"{user.email}",
-                    "reset_token": f"{user.reset_token}"})
+                    "reset_token": f"{user.reset_token}"}), 200
 
 
 if __name__ == "__main__":
