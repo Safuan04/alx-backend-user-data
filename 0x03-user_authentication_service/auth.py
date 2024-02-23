@@ -73,6 +73,11 @@ class Auth:
 
         return user
 
+    def destroy_session(self, user_id: int) -> None:
+        """ update the corresponding users session ID to None
+        """
+        self._db.update_user(user_id, session_id=None)
+
 
 def _generate_uuid() -> str:
     """ Generate an UUID
