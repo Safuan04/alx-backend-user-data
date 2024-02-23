@@ -97,7 +97,7 @@ def update_password() -> str:
 
     try:
         AUTH.update_password(user_reset_token, user_new_password)
-    except Exception:
+    except ValueError:
         abort(403)
 
     return jsonify({"email": f"{user_email}",
